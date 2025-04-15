@@ -13,8 +13,8 @@ def convert_filename_to_requirement(filename):
         package_name = match.group(1)
         version = match.group(2)
         
-        # 언더스코어를 하이픈으로 변환
-        package_name = package_name.replace('_', '-')
+        # 하이픈을 언더스코어로 변환
+        package_name = package_name.replace('-', '_')
         
         return f"{package_name}=={version}"
     return None

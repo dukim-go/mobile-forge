@@ -16,7 +16,7 @@ def create_recipe_file(package_name, version):
     with open(meta_yaml_path, 'w') as f:
         f.write(f'''package:
   name: {package_name}
-  version: {version}
+  version: "{version}"
 ''')
 
 def process_requirements():

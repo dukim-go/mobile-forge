@@ -24,6 +24,14 @@
   - 파일 이동:
     - `dependency(dukim)/1_dependency_origin_check/origin_requirements.txt`
 
+- 정렬
+  - 실행:
+    - `sort_origin_requirements.py`
+  - input:
+    - `dependency(dukim)/1_dependency_origin_check/origin_requirements.txt`
+  - output:
+    - `dependency(dukim)/1_dependency_origin_check/sort_origin_requirements.txt`
+
 ---
 
 ## 2_dependency_recipes
@@ -63,5 +71,99 @@
 
 ## 비교
 
-- left: 1_dependency_origin_check/origin_requirements.txt
-- right: 4_dependency_dist_check/dependency_dist_check.txt
+- left: dependency(dukim)/1_dependency_origin_check/sort_origin_requirements.txt
+- right: dependency(dukim)/4_dependency_dist_check/dependency_dist_check.txt
+
+## ⚠️ 아직
+
+```text
+aiohttp
+
+package:
+  name: aiohttp
+  version: 3.11.14
+===>
+package:
+  name: aiohttp
+  version: 3.10.5
+
+--------------------
+h11
+- patch 작성
+
+--------------------
+
+frozenlist
+
+requirements:
+  build:
+    - cython>=3.0.0b3
+
+--------------------
+idna
+
+package:
+  name: idna
+  version: 3.10
+===>
+package:
+  name: idna
+  version: "3.10"
+
+
+--------------------
+jiter
+
+일단 포기 (maturin)
+
+--------------------
+jsonpatch
+
+package:
+  name: jsonpatch
+  version: 1.33
+===>
+package:
+  name: jsonpatch
+  version: "1.33"
+
+--------------------
+orjson
+
+일단 포기 (maturin)
+
+--------------------
+pydantic
+
+일단 포기 (maturin)
+
+--------------------
+propcache
+
+requirements:
+  build:
+    - cython>=3.0.12
+
+--------------------
+pydantic==2.10.6
+
+일단 포기 (maturin)
+
+
+--------------------
+requests
+
+일단 포기
+
+--------------------
+yarl
+
+requirements:
+  build:
+    - cython>=3.0.12
+
+--------------------
+zstandard
+
+일단 포기
+```
