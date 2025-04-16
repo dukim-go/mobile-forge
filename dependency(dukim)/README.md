@@ -74,6 +74,52 @@
 - left: dependency(dukim)/1_dependency_origin_check/sort_origin_requirements.txt
 - right: dependency(dukim)/4_dependency_dist_check/dependency_dist_check.txt
 
+## maturin 문제
+
+- maturin (Rust로 작성된 Python 바인딩을 빌드하는데 사용되는 도구)
+- [pyproject.toml](../pyproject.toml) 의존성 수정
+
+  - 의존성 추가
+
+    ```pyproject.toml
+    ...
+    "jsonschema == 4.23.0",
+    "maturin >= 1.0.0, < 2.0.0",
+    "packaging == 24.2",
+    ...
+    ```
+
+- maturin 직접빌드
+
+  - [src/forge/cross.py](../src/forge/cross.py) 수정
+  - 코드영역 삭제 or 주석처리
+
+    ```py
+    # If we're doing a host build, require binary packages.
+    # build environment can use non-binary packages.
+    + (
+        []
+        if build
+        else [
+            "--only-binary",
+            ":all:",
+        ]
+    )
+    ```
+
+- Rust Compiler 설치 & 환경설정
+
+  ```bash
+  # 설치
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+  # 환경설정 (or 터미널 재시작)
+  source "$HOME/.cargo/env"
+
+  # Rust가 올바르게 설치되었는지 확인
+  rustc --version
+  ```
+
 ## ⚠️ 아직
 
 ```text
@@ -92,7 +138,6 @@ h11
 - patch 작성
 
 --------------------
-
 frozenlist
 
 requirements:
